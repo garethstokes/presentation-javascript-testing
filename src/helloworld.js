@@ -2,7 +2,7 @@
   
   "use strict";
 
-  var message = "hello world";
+  var message = "hello garry";
   return message;
 
 })();

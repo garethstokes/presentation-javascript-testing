@@ -34,7 +34,7 @@ module.exports = function(grunt) {
     },
 
     jasmine : {
-      src : 'src/**/*.js',
+      src : 'src/*.js',
       options : {
         specs : 'spec/**/*-spec.js'
       }
@@ -67,19 +67,20 @@ module.exports = function(grunt) {
       }
     },
 
-    reload: {
-      port: 7777,
-      proxy: {
-        host: 'localhost',
-        port: '8080'
+    connect: {
+      server: {
+        options: {
+          port: 8080
+        }
       }
     },
 
     watch: {
       files: [
-        '<config:lint.files>'
+        'src/*.js',
+        'Gruntfile.js'
       ],
-      tasks: 'default reload'
+      tasks: ['default']
     },
 
     copy: { 
@@ -99,9 +100,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-reload');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   /* run these from the console, yo */
   grunt.registerTask('default', ['jshint', 'jasmine', 'clean', 'concat', 'uglify', 'copy:versioned']);
-  grunt.registerTask('watch', 'server reload watch'); 
+  grunt.registerTask('dev', ['default', 'connect', 'watch']); 
 };
