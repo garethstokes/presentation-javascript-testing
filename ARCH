@@ -1,0 +1,7 @@
+slide = {
+  heading: "string",
+  body: "string",
+  points: ["string"]
+};
+
+presentation = [slide];
