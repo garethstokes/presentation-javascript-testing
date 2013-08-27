@@ -16,6 +16,10 @@ ul {
   list-style: disc;
 }
 
+pre {
+  width: 450px;
+}
+
 .slide-container {
   left: 0;
   top: 50%;
@@ -25,10 +29,29 @@ ul {
 }
 
 .slide-widget-container {
-  width: 400px;
+  width: 500px;
   margin: 0 auto;
 }
 
 .slide {
   height: 500px;
+}
+
+.hero img {
+  float: left;
+  width: 250px;
+}
+
+.hero p {
+  float: right;
+  width: 230px;
+  height: 100px;
+  padding: 10px;
+  margin: 0;
+}
+
+.hero {
+  height: 100px;
+  background-color: #000;
+  margin: 40px 0;
 }

@@ -32,11 +32,11 @@ describe('presentation', function() {
         return "two";
       });
 
-      presentation.slide(slide);
+      presentation.add(slide);
     });
 
     it('returns ok', function() {
-      expect(presentation.ok).toEqual(true);
+      expect(presentation.init('something')).toEqual({ ok: true });
     });
 
     it('will play in order and not past last slide', function() {

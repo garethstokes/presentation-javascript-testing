@@ -12,15 +12,18 @@
     <meta charset="utf-8">
 
     <script src="js/presentation.js"></script>
+    <script type="text/javascript">
+      window.onload = function() {
+        presentation.init('presentation-container');
+        presentation.next();
+      };
+    </script>
 </head>
 <body>
 <div class="slide-container">
   <section class="widget">
     <div class="slide-widget-container">
-        <div class="body slide">
-          <h2>Testing the javascripts</h2>
-          <p>tools and tips for making your javascript more robust</p>
-        </div>
+        <div id='presentation-container' class="body slide"></div>
     </div>
   </section>
 </div>

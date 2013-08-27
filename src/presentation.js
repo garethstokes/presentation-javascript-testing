@@ -1,33 +1,46 @@
 /*exported Presentation */
 /*global document */
 
-function Presentation(elementName) { 
+function Presentation() { 
 
   "use strict";
 
   var slides = [],
       index = 0,
-      element = document.getElementById(elementName);
+      clear = false,
+      element;
 
-  /*
-    do some simple checking to see if a element of 
-    that name is found on the page.
-  */
-  if (typeof element === 'undefined') {
-    return {
-      ok: false,
-      message: "element: " + elementName + " not found on page"
-    };
-  }
 
   return {
     ok: true,
+
+    /*
+      do some simple checking to see if a element of 
+      that name is found on the page.
+    */
+    init: function(elementName) {
+      element = document.getElementById(elementName);
+      if (typeof element === 'undefined') {
+        return {
+          ok: false,
+          message: "element: " + elementName + " not found on page"
+        };
+      }
+
+      var self = this;
+
+      document.onkeypress = function() {
+        self.next();
+      };
+      
+      return { ok: true };
+    },
     
     /* 
       push a slide to the presentation 
       stack.
     */
-    slide: function(s) {
+    add: function(s) {
       slides.push(s);
     },
 
@@ -39,15 +52,12 @@ function Presentation(elementName) {
     next: function() {
       var slide = slides[index];
 
-      if (slide.finished()) {
+      if (typeof slide === 'undefined' || slide.finished()) {
         // return if we are at the last
         // page.
         if (index === slides.length) {
           return;
         }
-
-        // try again.
-        this.next();
       }
       
       // get the html from the slide
@@ -57,6 +67,7 @@ function Presentation(elementName) {
 
       if (slide.finished()) {
         index = index + 1;
+        clear = true;
       }
     },
 
@@ -65,9 +76,14 @@ function Presentation(elementName) {
     },
 
     render: function(html) {
+      if (clear) {
+        element.innerHTML = '';
+        clear = false;
+      }
+
       var article = document.createElement('article');
       article.innerHTML = html;
-      element.innerHTML = element.innerHTML + article;
+      element.innerHTML = element.innerHTML + article.innerHTML;
     }
   };
 

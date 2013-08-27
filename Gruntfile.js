@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    src: ['src/*.js'],
+    src: ['src/*.js', 'src/slides/*.js'],
     lib: ['lib/*.js'],
 
     jshint: {
@@ -50,8 +50,9 @@ module.exports = function(grunt) {
       all: {
         options: { stripBanners: false },
         src: [
+          'lib/*.js',
           'src/*.js',
-          'lib/*.js'
+          'src/slides/*.js'
         ],
         dest: 'js/presentation.js'
       }
@@ -78,6 +79,7 @@ module.exports = function(grunt) {
     watch: {
       files: [
         'src/*.js',
+        'src/slides/*.js',
         'Gruntfile.js'
       ],
       tasks: ['default']
